@@ -297,3 +297,37 @@ def update_last_mfd_at_file(type, target_date):
         with open(file_path, 'w') as file:        
             if file:
                 file.write(target_date)
+
+
+def write_target_date_information(type, date):
+    date = date.strftime("%Y-%m-%d")
+    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    file_path = ''
+
+    if(type == 'bracket'):
+        file_path = "\\\\dae0fb01.apac.bosch.com\\EDC\\Common\\FA3\\log-file\\Log_Clinching_Bracket.txt"
+    else:
+        file_path = "\\\\dae0fb01.apac.bosch.com\\EDC\\Common\\FA3\\log-file\\Log_Clinching_Housing.txt"
+
+    if os.path.isfile(file_path):
+        with open(file_path, 'a') as file: 
+
+            if file:
+                file.write('job starts from: ' + current_time + '\n')
+                file.write('target_date: ' + date + '\n') 
+
+def write_complete_information(type, date):
+    date = date.strftime("%Y-%m-%d")
+    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    file_path = ''
+
+    if(type == 'bracket'):
+        file_path = "\\\\dae0fb01.apac.bosch.com\\EDC\\Common\\FA3\\log-file\\Log_Clinching_Bracket.txt"
+    else:
+        file_path = "\\\\dae0fb01.apac.bosch.com\\EDC\\Common\\FA3\\log-file\\Log_Clinching_Housing.txt"
+
+    if os.path.isfile(file_path):
+        with open(file_path, 'a') as file: 
+
+            if file:
+                file.write('job finished at: ' + current_time + '\n' + '\n')

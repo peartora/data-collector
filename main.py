@@ -19,9 +19,9 @@ def main_process(type):
         exit()
     else:
         while not functions.is_target_date_over_today(target_date):
+            functions.write_target_date_information(type, target_date)
             print('target_date')
             print(target_date)
-            print(datetime.datetime.now())
 
             dmc_list_from_bulkserver = functions.get_dmc_list_from_bulk_server(type, target_date)
             if dmc_list_from_bulkserver:
@@ -47,15 +47,13 @@ def main_process(type):
                 if functions.is_target_date_today(target_date):
                     exit() # restart by scheduler
                 else:
+                    functions.write_complete_information(type, target_date)
                     target_date = target_date + datetime.timedelta(days=1)
                     functions.update_last_mfd_at_file(type, target_date)
-                    print('target_date+1')
-                    print(target_date)
             else:
                 if functions.is_target_date_today(target_date):
                     exit() # restart by scheduler
                 else:
+                    functions.write_complete_information(type, target_date)
                     target_date = target_date + datetime.timedelta(days=1)
                     functions.update_last_mfd_at_file(type, target_date)
-                    print('target_date+1')
-                    print(target_date)
